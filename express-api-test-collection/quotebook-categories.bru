@@ -1,0 +1,22 @@
+meta {
+  name: Quotebook Categories
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:3000/quotebook/categories
+  body: none
+  auth: none
+}
+
+tests {
+  test("Correct Response", function() {
+    expect(res.body ==
+    `A possible category is successQuotes
+  
+  A possible category is perseveranceQuotes
+  
+  A possible category is happinessQuotes`)
+  })
+}

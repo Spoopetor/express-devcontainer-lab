@@ -1,0 +1,21 @@
+meta {
+  name: Circle Test
+  type: http
+  seq: 1
+}
+
+get {
+  url: htpp://localhost:3000/math/circle/2
+  body: none
+  auth: none
+}
+
+tests {
+  test("Correct Values", function() {
+    expect(res.body === {
+      "area": 12.5663706143592,
+      "circumference": 12.5663706143592
+    }
+    )
+  })
+}

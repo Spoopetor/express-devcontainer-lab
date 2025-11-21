@@ -26,10 +26,10 @@ This API allows the client to calculate the several math operations based on par
   - If `r` `{"error": "Invalid radius. Please provide numeric values."}`
 
 ## Notes:
-- The `width` and `height` must be provided as part of the URL path.
-- The `width` and `height` is expected to be numeric. Non-numeric values will result in an error.
+- The `radius` must be provided as part of the URL path.
+- The `radius` is expected to be numeric. Non-numeric values will result in an error.
 
-## Calculate Circle
+## Calculate Rectangle
 **Request Format:** `/math/rectangle/:w/:h`
 
 **Request Type:** GET

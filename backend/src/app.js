@@ -139,7 +139,6 @@ let base, exponent;
 
 });
 
-
 app.get('/quotebook/categories', function (req, res) {
   res.type('text');
   let output = "";
@@ -148,6 +147,67 @@ app.get('/quotebook/categories', function (req, res) {
   }
   res.send(output);
 });
+
+app.get('/quotebook/category/:category', function (req, res) {
+  let category = req.params.category;
+
+  let quotes;
+
+  switch (category) {
+    case 'successQuotes':
+      quotes = successQuotes;
+      break;
+    case 'perseveranceQuotes':
+      quotes = perseveranceQuotes;
+      break;
+    case 'happinessQuotes':
+      quotes = happinessQuotes;
+      break;
+    default:
+      res.status(400).json({ "error": `no category listed for ${category}`});
+      return;
+  }
+  
+  let randQuote = quotes[Math.floor(Math.random() * quotes.length)];
+
+  res.type('json');
+  res.json(randQuote);
+});
+
+app.post('/quotebook/quote/new/:c/:q/:a', function (req, res) {
+  let category = req.params.c;
+  let quote = req.params.q;
+  let author = req.params.a;
+
+  if (!category || !quote || !author) {
+    res.status(400).json({'error': 'invalid or insufficient user input'});
+    return;
+  }
+  
+  let quoteObj = {
+    'quote': quote,
+    'author': author
+  };
+
+  switch (category) {
+    case 'successQuotes':
+      successQuotes.push(quoteObj);
+      break;
+    case 'perseveranceQuotes':
+      perseveranceQuotes.push(quoteObj);
+      break;
+    case 'happinessQuotes':
+      happinessQuotes.push(quoteObj);
+      break;
+    default:
+      res.status(400).json({'error': 'invalid or insufficient user input'});
+      return;
+  }
+
+
+  res.status(200).send("Success!");
+});
+  
 
 app.listen(PORT, () => {
   console.log(`Server listening on http://localhost:${PORT}`);
